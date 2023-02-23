@@ -6,23 +6,21 @@ classdef SignalDetection
       correctRejections
    end
    methods
-      function obj = SignalDetection(hits, misses, falseAlarms, correctRejections)
+      function obj = SignalDetection(hits, misses, falseAlarms, correctRejections, hitRate, falseAlarmRate)
          obj.hits = hits;
          obj.misses = misses;
          obj.falseAlarms = falseAlarms;
          obj.correctRejections = correctRejections;
+         obj.hitRate = obj.hits / (obj.hits + obj.misses);
+         obj.falseAlarmRate = obj.falseAlarms / (obj.falseAlarms + obj.correctRejections);
       end
       
       function D = d_prime(obj)
-         hitRate = obj.hits / (obj.hits + obj.misses);
-         falseAlarmRate = obj.falseAlarms / (obj.falseAlarms + obj.correctRejections);
-         D = norminv(hitRate) - norminv(falseAlarmRate);
+         D = norminv(obj.hitRate) - norminv(obj.falseAlarmRate);
       end
       
       function C = criterion(obj)
-         hitRate = obj.hits / (obj.hits + obj.misses);
-         falseAlarmRate = obj.falseAlarms / (obj.falseAlarms + obj.correctRejections);
-         C = -0.5 * (norminv(hitRate) + norminv(falseAlarmRate));
+         C = -0.5 * (norminv(obj.hitRate) + norminv(obj.falseAlarmRate));
       end
    end
 end
