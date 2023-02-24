@@ -1,0 +1,11 @@
+% Plots
+      function plot_roc = plot_roc(obj)
+          x = [0, obj.falseAlarmRate, 1];
+          y = [0, obj.hitRate, 1];
+          plot(x, y, '-')
+          xlabel('False Alarm Rate')
+          ylabel('Hit Rate')
+          xlim([0, 1])
+          ylim([0, 1])
+          title('ROC Curve')
+      end
