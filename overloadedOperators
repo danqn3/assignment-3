@@ -1,0 +1,9 @@
+% Operator Overloading
+      function Total = plus(objx, objy)
+        Total = SignalDetection(objx.hits + objy.hits, objx.misses + objy.misses, ...
+            objx.falseAlarms + objy.falseAlarms, objx.correctRejections + objy.correctRejections);
+      end
+      function Multiplied = mtimes(obj, k)
+        Multiplied = SignalDetection(obj.hits .* k, obj.misses .* k, obj.falseAlarms .* k, ...
+            obj.correctRejections .* k);
+      end
